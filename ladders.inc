@@ -16,6 +16,7 @@
 
 #include <YSI_Coding\y_hooks>
 
+#define LADDER_TEXT	"Premi ~k~~VEHICLE_ENTER_EXIT~ per salire"
 
 #define MAX_LADDER	(16)
 #define CLIMB_SPEED	(0.1)
@@ -232,7 +233,7 @@ EnterLadder(playerid, ladder, Float:z)
 	SetPlayerFacingAngle(playerid, ldr_Data[ladder][ldr_ang]);
 	SetPlayerPos(playerid, ldr_Data[ladder][ldr_posX], ldr_Data[ladder][ldr_posY], zOffset);
 
-	ApplyAnimation(playerid, "PED", "CLIMB_IDLE", 3.0, 0, 0, 0, 1, 0, 1);
+	ApplyAnimation(playerid, "PED", "CLIMB_IDLE", 3.0, false, false, false, true, 0, SYNC_ALL);
 	ldr_enterLadderTick[playerid] = GetTickCount();
 	ldr_currentLadder[playerid] = ladder;
 }
@@ -262,7 +263,7 @@ hook OnPlayerEnterDynArea(playerid, areaid)
 			GetPlayerPos(playerid, z, z, z);
 
 			if(z < ldr_Data[i][ldr_top] + 2.0 && z > ldr_Data[i][ldr_base] - 1.0)
-				ShowActionText(playerid, "Press F to climb", 0, 120);
+				ShowActionText(playerid, LADDER_TEXT, 0, 120);
 		}
 	}
 
@@ -281,9 +282,9 @@ hook OnPlayerUpdate(playerid)
 	if(ldr_currentLadder[playerid] != -1)
 	{
 		new
-			k,
-			ud,
-			lr,
+			KEY:k,
+			KEY:ud,
+			KEY:lr,
 			Float:z;
 
 		GetPlayerKeys(playerid, k, ud, lr);
@@ -300,7 +301,7 @@ hook OnPlayerUpdate(playerid)
 		{
 			if(ldr_currentAnim[playerid])
 			{
-				ApplyAnimation(playerid, "FINALE", "FIN_HANG_LOOP", 4.0, 1, 0, 0, 0, 0);
+				ApplyAnimation(playerid, "FINALE", "FIN_HANG_LOOP", 4.0, true, false, false, false, 0);
 				// ApplyAnimation(playerid, "PED", "CLIMB_JUMP", 3.0, 0, 0, 0, 1, 0, 1); // Alternative animation
 				ldr_currentAnim[playerid]=0;
 				SetPlayerVelocity(playerid, 0.0, 0.0, CLIMB_SPEED);
@@ -308,7 +309,7 @@ hook OnPlayerUpdate(playerid)
 			else
 			{
 				// ApplyAnimation(playerid, "FINALE", "FIN_HANG_LOOP", 4.0, 1, 0, 0, 0, 0); // Alternative animation
-				ApplyAnimation(playerid, "PED", "CLIMB_IDLE", 3.0, 0, 0, 0, 1, 0, 1);
+				ApplyAnimation(playerid, "PED", "CLIMB_IDLE", 3.0, false, false, false, true, 0, SYNC_ALL);
 				ldr_currentAnim[playerid]=1;
 			}
 		}
@@ -316,21 +317,21 @@ hook OnPlayerUpdate(playerid)
 		{
 			if(ldr_currentAnim[playerid])
 			{
-				ApplyAnimation(playerid, "FINALE", "FIN_HANG_LOOP", 4.0, 1, 0, 0, 0, 0);
+				ApplyAnimation(playerid, "FINALE", "FIN_HANG_LOOP", 4.0, true, false, false, false, 0);
 				// ApplyAnimation(playerid, "PED", "CLIMB_JUMP", 3.0, 0, 0, 0, 1, 0, 1); // Alternative animation
 				ldr_currentAnim[playerid]=0;
 			}
 			else
 			{
 				// ApplyAnimation(playerid, "FINALE", "FIN_HANG_LOOP", 4.0, 1, 0, 0, 0, 0); // Alternative animation
-				ApplyAnimation(playerid, "PED", "CLIMB_IDLE", 3.0, 0, 0, 0, 1, 0, 1);
+				ApplyAnimation(playerid, "PED", "CLIMB_IDLE", 3.0, false, false, false, true, 0, SYNC_ALL);
 				ldr_currentAnim[playerid]=1;
 				SetPlayerVelocity(playerid, 0.0, 0.0, -(CLIMB_SPEED*0.7));
 			}
 		}
 		else
 		{
-			ApplyAnimation(playerid, "PED", "CLIMB_IDLE", 3.0, 0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "PED", "CLIMB_IDLE", 3.0, false, false, false, true, 0, SYNC_ALL);
 			SetPlayerVelocity(playerid, 0.0, 0.0, IDLE_SPEED);
 		}
 	}

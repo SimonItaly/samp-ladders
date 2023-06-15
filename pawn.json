@@ -7,6 +7,6 @@
 		"pawn-lang/samp-stdlib",
 		"pawn-lang/YSI-Includes",
 		"samp-incognito/samp-streamer-plugin",
-		"ScavengeSurvive/action-text"
+		"SimonItaly/action-text"
 	]
 }
