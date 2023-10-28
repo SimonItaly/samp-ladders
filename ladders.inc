@@ -184,7 +184,7 @@ stock GetPlayerLadder(playerid)
 ==============================================================================*/
 
 
-hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+hook OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 {
 	if(newkeys & 16)
 	{
