@@ -186,7 +186,7 @@ stock GetPlayerLadder(playerid)
 
 hook OnPlayerKeyStateChange(playerid, KEY:newkeys, KEY:oldkeys)
 {
-	if(newkeys & 16)
+	if(newkeys & KEY_SECONDARY_ATTACK)
 	{
 		if(ldr_currentLadder[playerid] != -1)
 		{
@@ -297,7 +297,7 @@ hook OnPlayerUpdate(playerid)
 			return 1;
 		}
 
-		if(ud == KEY_UP)
+		if(_:ud == KEY_UP)
 		{
 			if(ldr_currentAnim[playerid])
 			{
@@ -313,7 +313,7 @@ hook OnPlayerUpdate(playerid)
 				ldr_currentAnim[playerid]=1;
 			}
 		}
-		else if(ud == KEY_DOWN)
+		else if(_:ud == KEY_DOWN)
 		{
 			if(ldr_currentAnim[playerid])
 			{
